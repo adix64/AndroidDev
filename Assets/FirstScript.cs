@@ -20,12 +20,12 @@ public class FirstScript : MonoBehaviour
         
     }
 
-    public void DropObject()
+    public void DropObject() // referenced by buttons in scene onClick()
     {
         rigidBody.useGravity = true;
     }
 
-    public void ResetPosition()
+    public void ResetPosition() // referenced by buttons in scene onClick()
     {
         rigidBody.useGravity = false;
         rigidBody.position = initPos;
