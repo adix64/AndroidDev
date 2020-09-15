@@ -17,8 +17,8 @@ public class MovePlayer : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 offset = xCtrl * Camera.main.transform.right +
-                         zCtrl * Camera.main.transform.forward; // in spatiul camera
+        Vector3 offset = (x + xCtrl) * Camera.main.transform.right +
+                         (z + zCtrl) * Camera.main.transform.forward; // in spatiul camera
 
         offset.y = 0;
         offset = offset.normalized; // aducem la lungime unitate

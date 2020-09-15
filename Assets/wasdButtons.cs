@@ -4,11 +4,13 @@ public class wasdButtons : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public float timePressed = 0f;
     public bool buttonPressed = false;
+
     public MovePlayer player;
 
     [SerializeField]
-    public enum ButtonDirType {LEFT, RIGHT, FORWARD, BACK };
-    public ButtonDirType buttonType;
+    public enum ButtonDirection{LEFT, RIGHT, FORWARD, BACK };
+    
+    public ButtonDirection buttonType;
 
 
     public void OnPointerDown(PointerEventData eventData)
@@ -16,16 +18,16 @@ public class wasdButtons : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         buttonPressed = true;
         switch (buttonType)
         {
-            case ButtonDirType.LEFT:
+            case ButtonDirection.LEFT:
                 player.xCtrl = -1;
                 break;
-            case ButtonDirType.RIGHT:
+            case ButtonDirection.RIGHT:
                 player.xCtrl = 1;
                 break;
-            case ButtonDirType.FORWARD:
+            case ButtonDirection.FORWARD:
                 player.zCtrl = 1;
                 break;
-            case ButtonDirType.BACK:
+            case ButtonDirection.BACK:
                 player.zCtrl = -1;
                 break;
         }
@@ -51,16 +53,16 @@ public class wasdButtons : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         ResetButton();
         switch (buttonType)
         {
-            case ButtonDirType.LEFT:
+            case ButtonDirection.LEFT:
                 player.xCtrl = 0;
                 break;
-            case ButtonDirType.RIGHT:
+            case ButtonDirection.RIGHT:
                 player.xCtrl = 0;
                 break;
-            case ButtonDirType.FORWARD:
+            case ButtonDirection.FORWARD:
                 player.zCtrl = 0;
                 break;
-            case ButtonDirType.BACK:
+            case ButtonDirection.BACK:
                 player.zCtrl = 0;
                 break;
         }

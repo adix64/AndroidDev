@@ -6,12 +6,12 @@ public class FirstScript : MonoBehaviour
 {
     public Transform cutie;
     Vector3 initPos;
-    Rigidbody rigidBody;
+    Rigidbody rigidBodyulMeu;
     // Start is called before the first frame update
     void Start()
     {
         initPos = cutie.transform.position;
-        rigidBody = cutie.GetComponent<Rigidbody>();
+        rigidBodyulMeu = cutie.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -22,13 +22,13 @@ public class FirstScript : MonoBehaviour
 
     public void DropObject() // referenced by buttons in scene onClick()
     {
-        rigidBody.useGravity = true;
+        rigidBodyulMeu.useGravity = true;
     }
 
     public void ResetPosition() // referenced by buttons in scene onClick()
     {
-        rigidBody.useGravity = false;
-        rigidBody.position = initPos;
+        rigidBodyulMeu.useGravity = false;
+        rigidBodyulMeu.position = initPos;
     }
 
 }
