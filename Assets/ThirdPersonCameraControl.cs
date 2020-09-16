@@ -25,7 +25,7 @@ public class ThirdPersonCameraControl : MonoBehaviour
         pitch = Mathf.Clamp(pitch, -45, 45); //limiteaza intre -45 si 45
 
         transform.rotation = Quaternion.Euler(pitch, yaw, 0); // unghiurile cu axele principale
-        transform.position = player.position // de la pozitia playerului
+        transform.position = player.position// de la pozitia playerului
                             - transform.forward * distToTarget; // ne dam in spate
     }
 }

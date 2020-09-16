@@ -29,5 +29,15 @@ public class SeeSharpBasics : MonoBehaviour
     {
         float y = Mathf.Sin(Time.time);
         transform.position = new Vector3(0, y, 0);
+
+        bool conditie = true;
+        if (conditie)
+        {
+            int i = 1;
+        }
+        else
+        {
+            int i = 2;
+        }
     }
 }

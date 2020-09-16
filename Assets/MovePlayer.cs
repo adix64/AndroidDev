@@ -6,10 +6,11 @@ public class MovePlayer : MonoBehaviour
 {
     public float speedMultiplier = 1f;
     public float xCtrl, zCtrl;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponentInChildren<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -18,10 +19,15 @@ public class MovePlayer : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 offset = (x + xCtrl) * Camera.main.transform.right +
-                         (z + zCtrl) * Camera.main.transform.forward; // in spatiul camera
+                         (z + zCtrl) * Camera.main.transform.forward; // din spatiul camera in spatiul lume
 
-        offset.y = 0;
+        offset.y = 0; // aducem in plan orizontal offsetul
         offset = offset.normalized; // aducem la lungime unitate
+
+        Vector3 characterSpaceVelocity = transform.InverseTransformDirection(offset); // trecem din spatiul lume in spatiul personaj
+        //setam parametrii animatorului, case sensitive, ca in Animator din editor:
+        animator.SetFloat("VelocityX", characterSpaceVelocity.x);
+        animator.SetFloat("VelocityZ", characterSpaceVelocity.z);
 
         offset *= Time.deltaTime; // deplasamentul proportional cu timpul scurs intre 2 cadre
         
