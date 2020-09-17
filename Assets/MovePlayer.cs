@@ -7,6 +7,7 @@ public class MovePlayer : MonoBehaviour
     public float speedMultiplier = 1f;
     public float xCtrl, zCtrl;
     Animator animator;
+    public GameObject projectilePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +33,16 @@ public class MovePlayer : MonoBehaviour
         offset *= Time.deltaTime; // deplasamentul proportional cu timpul scurs intre 2 cadre
         
         transform.position += offset * speedMultiplier; // deplasament per frame
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            InstantiateNewObj();
+    }
+
+    void InstantiateNewObj()
+    {
+        GameObject go = GameObject.Instantiate(projectilePrefab); // cloneaza obiectul prefab in scena(ierarhie)
+        Projectile projectile = go.GetComponent<Projectile>(); // referentiem scriptul Projectile
+        go.transform.position = transform.position; // setam pozitia proiectilului la pozitia personajului
+        projectile.direction = Camera.main.transform.forward; // setam directia de deplasare a proiectilului
     }
 }

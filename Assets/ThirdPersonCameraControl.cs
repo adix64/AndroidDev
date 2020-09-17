@@ -19,8 +19,14 @@ public class ThirdPersonCameraControl : MonoBehaviour
         float mx = Input.GetAxis("Mouse X");
         float my = -Input.GetAxis("Mouse Y");
 
-        yaw += mx;
-        pitch += my;
+        if (Input.GetMouseButton(0)  &&
+            !Input.GetMouseButtonDown(0) &&
+            !Input.GetMouseButtonUp(0))
+        {
+            yaw += mx;
+            pitch += my;        
+        }
+
 
         pitch = Mathf.Clamp(pitch, -45, 45); //limiteaza intre -45 si 45
 
