@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/NewScene.unity
+    path: Assets/#Scenes/Menu.unity
+    guid: f00b7162be49946458eef7e1ba89d3d4
+  - enabled: 1
+    path: Assets/#Scenes/3rdPersonArena.unity
     guid: 9ca5cc6eb764ec1408640216dfae25e1
+  - enabled: 1
+    path: Assets/#Scenes/TextTouchSelection.unity
+    guid: 1afe2c939435a1f47a0080d07809e21a
+  - enabled: 1
+    path: Assets/#Scenes/TextButtonSelection.unity
+    guid: 3dcc305d56706ee44b1208a00d7d75fa
   m_configObjects: {}
