@@ -16,6 +16,31 @@ public class SelectableTextList : MonoBehaviour
     private void Start()
     {
         listEntries = new List<RectTransform>(); // initializam lista, care initial este o referinta null
+       
+        //incarcam din memoria non-volatila intrarile din lista
+        numEntries = PlayerPrefs.GetInt("numEntries", 0);
+        for (int i = 0; i < numEntries; i++)
+            AddEntryByText(PlayerPrefs.GetString("textEntry" + i.ToString(), "NULLstring"), i);
+    }
+
+    public void AddEntryByText(string entryText, int index)
+    {
+        RectTransform newEntry = GameObject.Instantiate(listEntryTemplate, scrollViewContent); // clonare entry prefab
+
+        var textObj = newEntry.GetComponent<TMPro.TMP_Text>(); // obtinem componenta de text de pe intrare
+        textObj.text = entryText; // si scriem in ea
+
+        // referentiem scriptul SelectableEntry atasat noii intrari
+        var selectableListEntry = newEntry.GetComponent<SelectableEntry>();
+        selectableListEntry.entryIndex = index; // adaugam noua intrare urmatoarea pozitie
+        // pentru scriptul SelectableEntry referentiem scriptul curent(SelectableTextList):
+        selectableListEntry.selectableTextList = this;
+
+        //setam pozitia noii intrari cu 50 de unitati mai jos decat intrarea precedenta, ca sa nu se suprapuna cu celelalte
+        var oldPosition = newEntry.localPosition;
+        newEntry.localPosition = new Vector3(oldPosition.x, -50 * index, oldPosition.z);
+
+        listEntries.Add(newEntry); //retinem noua intrare in obiectul List<RectTransform> listEntries
     }
 
     public void AddEntry()
@@ -29,7 +54,7 @@ public class SelectableTextList : MonoBehaviour
         var selectableListEntry = newEntry.GetComponent<SelectableEntry>();
         selectableListEntry.entryIndex = numEntries; // adaugam noua intrare pe ultima pozitie, jos de tot in lista
         // pentru scriptul SelectableEntry referentiem scriptul curent(SelectableTextList):
-        selectableListEntry.selectableTextList = this; 
+        selectableListEntry.selectableTextList = this;
 
         //setam pozitia noii intrari cu 50 de unitati mai jos decat ultima intrare, ca sa nu se suprapuna cu celelalte
         var oldPosition = newEntry.localPosition;
@@ -38,6 +63,10 @@ public class SelectableTextList : MonoBehaviour
         listEntries.Add(newEntry); //retinem noua intrare in obiectul List<RectTransform> listEntries
 
         numEntries++; //incrementam numarul de intrari cu 1
+
+        // salvam in memoria non-volatila intrarea adaugata manual, actualizand si numarul total de intrari
+        PlayerPrefs.SetInt("numEntries", numEntries); 
+        PlayerPrefs.SetString("textEntry" + (numEntries-1).ToString(), textObj.text);
     }
 
     public void DeleteSelectedEntry()
